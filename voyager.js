@@ -28,21 +28,22 @@ function plot(buffer,offset,len,marker0,marker1,name){
     ctx.clearRect(0,0,W,H);
     ctx.beginPath();
     ctx.moveTo(x,center);
-    var plotStart=-3000;
+    var plotStart=-140;
     for(var i=0;i<len;i++){
         x+=dx;
         ctx.lineTo(x,center-buffer[i+offset+plotStart]*(zoom));
     }
 
-    /*Draw some markers*/
-    ctx.stroke();
+    /*Draw some markers
+   ctx.stroke();
+
     ctx.beginPath();
     ctx.moveTo(0,center-marker0*(zoom));
     ctx.lineTo(W,center-marker0*(zoom));
     ctx.moveTo(0,center-marker1*(zoom));
     ctx.lineTo(W,center-marker1*(zoom));
     ctx.moveTo(W-plotStart*dx,0);
-    ctx.lineTo(W-plotStart*dx,H);
+    ctx.lineTo(W-plotStart*dx,H);*/
     ctx.stroke();
 }
 
@@ -141,7 +142,7 @@ function startDisplayingChannel(obj){
     setInterval(function(){
         if(!obj.go)
             return;
-        for(var i=0;i<2;i++){
+        for(var i=0;i<6;i++){
             obj=nextLine(obj);
         }
         plot(obj.samples,obj.offset,1000,0,1,obj.plotName);
@@ -156,3 +157,4 @@ function onloadCallback(buffer){
 }
 
 loadSound("voyager.mp3",onloadCallback);
+

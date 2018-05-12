@@ -4,14 +4,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" >
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
 
 
         <link rel="icon" type="image/png" href="light-bulb-icon.png">
-<title>The Voyager Record</title>
+        <title>The Voyager Record</title>
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     </head>
@@ -19,30 +19,82 @@
 
         <div class="container-fluid">
             <div class="container">
-        <h1 style="text-align: center;">The Voyager Record</h1>
-        This is a demonstration of live decoding of the voyager record. This page was created by Malte Gruber.
-        The source code can be found <a href="https://github.com/MalteGruberPrivate/voyager-record-decoder">here.</a>
-        
-        <h2>What is going on?</h2>
-        This page loads a .mp3 file that was created by reading a copy of the voyager record and which can be found <a href="https://soundcloud.com/user-482195982/voyager-golden-record-encoded-images">here</a>.
-        Your browser runs some code that translates the audio recording of the record to an image. The phonograph records have two channels, left and right. These channels hold different sets of images which are displayed in the left and right windows. A time domain representation of the signal is shown as an oscilloscope picture, it matches the newest line of the image. Some images are replicated three times and represent the red, green and blue channels of the picture. I have not implemented a way of combining these, this was just a quick weekend project that turned out to be pretty neat.
-        
+                <h1 style="text-align: center;">The Voyager Record</h1>
+                This is a demonstration of live decoding of the voyager record. This page was created by Malte Gruber.
+                The source code can be found <a href="https://github.com/MalteGruberPrivate/voyager-record-decoder">here.</a>
+
+                <h2>What is going on?</h2>
+                This page loads a .mp3 file that was created by reading a copy of the voyager record and which can be found <a href="https://soundcloud.com/user-482195982/voyager-golden-record-encoded-images">here</a>.
+                Your browser runs some code that translates the audio recording of the record to an image. The phonograph records have two channels, left and right. These channels hold different sets of images which are displayed in the left and right windows. A time domain representation of the signal is shown as an oscilloscope picture, it matches the newest line of the image. Some images are replicated three times and represent the red, green and blue channels of the picture. I have not implemented a way of combining these, this was just a quick weekend project and others have done far better offline implementations.
+
             </div>
-        
+
             <hr>
             <div class="row">
                 <div class="col-lg">     
                     <h2>Left</h2>
+                    <!-- Yes, this is not the way to do this..-->
+                    <div class="btn-group btn-group-justified">
+                        <a onclick="leftChannel.offset-=256*328;" class="btn btn-default">Jump Back</a>
+                        <a onclick="leftChannel.go=!leftChannel.go" class="btn btn-default">Play/Pause</a>
+                        <a onclick="leftChannel.offset+=256*328;" class="btn btn-default">Jump Forward</a>
+                    </div>    
+
+
+
+                    <br>
+                    Bookmarks
+                    <br>
+                    <button type="button" onclick="leftChannel.offset=1320900" class="btn btn-default">Circle</button>
+                    <button type="button" onclick="leftChannel.offset=19813754" class="btn btn-default">A cell?</button>
+
+                    <button type="button" onclick="leftChannel.offset=17246644" class="btn btn-default">Organs</button>
+                    <button type="button" onclick="leftChannel.offset=20860305" class="btn btn-default">Embryo</button>
+                    <button type="button" onclick="leftChannel.offset=23967459" class="btn btn-default">Dudes</button>
+                    <button type="button" onclick="leftChannel.offset=28481695" class="btn btn-default">Numbers</button>
+                    <button type="button" onclick="leftChannel.offset=7628908" class="btn btn-default">Jupiter</button>
+                    <button type="button" onclick="leftChannel.offset=8169155" class="btn btn-default">Earth</button>
+
+                    <button type="button" onclick="leftChannel.offset=11165669" class="btn btn-default">Carbon</button>
+                    <button type="button" onclick="leftChannel.offset=12150593" class="btn btn-default">DNA</button>
+
+
+
+                    <br>
                     <canvas id="imgCanvasLeft" width="700" height="600" class="plot">    Your browser does not support the HTML5 canvas tag.</canvas>
                     <canvas id="plotLeft" width="700" height="200" style="border:1px solid #d3d3d3;">    Your browser does not support the HTML5 canvas tag.</canvas>
-                    
+
                 </div>
                 <div class="col-lg">
                     <h2>Right</h2>
-                    <canvas id="imgCanvasRight" width="700" height="600" class="plot" >    Your browser does not support the HTML5 canvas tag.</canvas>
-                    <canvas id="plotRight" width="700" height="200" style="border:1px solid #d3d3d3;">    Your browser does not support the HTML5 canvas tag.</canvas>
-                </div>
+                    <div class="container">
 
+                        <div class="btn-group btn-group-justified">
+                            <!-- Yes, this is not the way to do this..-->
+                            <a onclick="rightChannel.offset-=256*328;" class="btn btn--default">Jump Back</a>
+                            <a onclick="rightChannel.go=!rightChannel.go" class="btn btn--default">Play/Pause</a>
+                            <a onclick="rightChannel.offset+=256*328;" class="btn btn--default">Jump Forward</a>
+                        </div>   
+
+                        <br>
+                        Bookmarks
+                        <br>
+                        <button type="button" onclick="rightChannel.offset=3584332" class="btn btn-default">Lizard</button>
+                        <button type="button" onclick="rightChannel.offset=4070813" class="btn btn-default">Eagle</button>
+                        <button type="button" onclick="rightChannel.offset=4651956" class="btn btn-default">Zebras!</button>
+                        <button type="button" onclick="rightChannel.offset=17257470" class="btn btn-default">Some dude</button>
+                        <button type="button" onclick="rightChannel.offset=18204290" class="btn btn-default">More dudes</button>
+                        <button type="button" onclick="rightChannel.offset=20785176" class="btn btn-default">A house</button>
+                        <button type="button" onclick="rightChannel.offset=25833852" class="btn btn-default">The UN?</button>
+
+
+
+                        <br>
+                        <canvas id="imgCanvasRight" width="700" height="600" class="plot" >    Your browser does not support the HTML5 canvas tag.</canvas>
+                        <canvas id="plotRight" width="700" height="200" style="border:1px solid #d3d3d3;">    Your browser does not support the HTML5 canvas tag.</canvas>
+
+                    </div>
+                </div>
             </div>
 
 
@@ -52,4 +104,5 @@
         <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
+
 
