@@ -1,4 +1,4 @@
-# Voyager Record Decoder
+# Voyager Golden Record Decoder
 
 Github hosted [DEMO HERE](https://maltegruber.github.io/voyager-record-decoder).
 
