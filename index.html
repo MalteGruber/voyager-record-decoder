@@ -5,42 +5,56 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" >
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="custom.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        
+        <link rel="icon" type="image/png" href="icon.png">
+        <title>Voyager Record</title>
 
-
-        <link rel="icon" type="image/png" href="light-bulb-icon.png">
-        <title>The Voyager Record</title>
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     </head>
     <body>
 
-        <div class="container-fluid">
-            <div class="container">
-                <h1 style="text-align: center;">The Voyager Record</h1>
-                This is a demonstration of live decoding of the voyager record. This page was created by Malte Gruber.
-                The source code can be found <a href="https://github.com/MalteGruberPrivate/voyager-record-decoder">here.</a>
 
-                <h2>What is going on?</h2>
-                This page loads a .mp3 file that was created by reading a copy of the voyager record and which can be found <a href="https://soundcloud.com/user-482195982/voyager-golden-record-encoded-images">here</a>.
-                Your browser runs some code that translates the audio recording of the record to an image. The phonograph records have two channels, left and right. These channels hold different sets of images which are displayed in the left and right windows. A time domain representation of the signal is shown as an oscilloscope picture, it matches the newest line of the image. Some images are replicated three times and represent the red, green and blue channels of the picture. I have not implemented a way of combining these, this was just a quick weekend project and others have done far better offline implementations.
+        <div class="container">
+            <h1 class="display-4" style="text-align: center;">The Voyager Record</h1>
+            This is a demonstration of in-browser live decoding of the voyager record. This page was created by Malte Gruber.
+            The source code can be found <a href="https://github.com/MalteGruberPrivate/voyager-record-decoder">here.</a>
+
+            <h2 style="text-align: center;">Description</h2>
+            This page loads a .mp3 file that was created by reading a copy of the Voyager phonograph record, the .mp3 recording can also be found
+            <a href="https://soundcloud.com/user-482195982/voyager-golden-record-encoded-images">here</a>.
+            This page then runs some code <mark>in your browser</mark> that translates the audio recording of the record to an image
+            (I.e what you see is decoded directly from the .mp3 audio file). The phonograph record has two channels, left and right.
+            These channels hold different sets of images which are shown in the left and right windows. A time domain representation
+            of the signal is shown as an oscilloscope graph, it matches the newest line of the image.
+
+        </div>
+
+        <hr>
+        <div class="container" id="loading_div">
+            <div class="jumbotron">
+                <h3 style="text-align: center;" id="loading_text">Loading Voyager MP3 file... </h3>
+                <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                <div class="progress">
+                    <div id="load_progress" class="progress-bar progress-bar-striped progress-bar-animated" style="width:40%"></div>
+                </div>                
 
             </div>
-
-            <hr>
-            <div class="row">
+        </div>
+        <div class="container-fluid">         
+            <div style="text-align: center;" class="row" id="decoder_div">
                 <div class="col-lg">     
-                    <h2>Left</h2>
+                    <h2>Left Channel</h2>
                     <!-- Yes, this is not the way to do this..-->
                     <div class="btn-group btn-group-justified">
                         <a onclick="leftChannel.offset-=256*328;" class="btn btn-default">Jump Back</a>
                         <a onclick="leftChannel.go=!leftChannel.go" class="btn btn-default">Play/Pause</a>
                         <a onclick="leftChannel.offset+=256*328;" class="btn btn-default">Jump Forward</a>
                     </div>    
-
-
 
                     <br>
                     Bookmarks
@@ -57,20 +71,16 @@
 
                     <button type="button" onclick="leftChannel.offset=11165669" class="btn btn-default">Carbon</button>
                     <button type="button" onclick="leftChannel.offset=12150593" class="btn btn-default">DNA</button>
-
-
-
-                    <br>
+                    
+                    <canvas id="plotLeft" width="700" height="120" class="oscilloscope">    Your browser does not support the HTML5 canvas tag.</canvas>
                     <canvas id="imgCanvasLeft" width="700" height="600" class="plot">    Your browser does not support the HTML5 canvas tag.</canvas>
-                    <canvas id="plotLeft" width="700" height="200" style="border:1px solid #d3d3d3;">    Your browser does not support the HTML5 canvas tag.</canvas>
 
                 </div>
                 <div class="col-lg">
-                    <h2>Right</h2>
+                    <h2>Right Channel</h2>
                     <div class="container">
 
-                        <div class="btn-group btn-group-justified">
-                            <!-- Yes, this is not the way to do this..-->
+                        <div class="btn-group btn-group-justified">                           
                             <a onclick="rightChannel.offset-=256*328;" class="btn btn--default">Jump Back</a>
                             <a onclick="rightChannel.go=!rightChannel.go" class="btn btn--default">Play/Pause</a>
                             <a onclick="rightChannel.offset+=256*328;" class="btn btn--default">Jump Forward</a>
@@ -90,15 +100,18 @@
 
 
                         <br>
+                        <canvas id="plotRight" width="700" height="120" class="oscilloscope" >    Your browser does not support the HTML5 canvas tag.</canvas>
                         <canvas id="imgCanvasRight" width="700" height="600" class="plot" >    Your browser does not support the HTML5 canvas tag.</canvas>
-                        <canvas id="plotRight" width="700" height="200" style="border:1px solid #d3d3d3;">    Your browser does not support the HTML5 canvas tag.</canvas>
 
                     </div>
                 </div>
+
             </div>
 
-
+            <hr>
+            <p style="text-align: center;">Malte Gruber 2018</p>
         </div>
+
         <script src="audio_loader.js"></script>        
         <script src="voyager.js"></script>
         <script src="js/bootstrap.min.js"></script>
