@@ -9,7 +9,11 @@ function loadSound(url,onloadCallback,loadingProgressCb){
     request.open('GET',url,true);
     request.responseType='arraybuffer';
     
-    request.onprogress=(e)=>{loadingProgressCb(0.9*Math.round(100*e.loaded/e.total))}
+    request.onprogress=(e)=>{
+        total_filesize=15164394;//Seems to change? -> e.total();
+        loadingProgressCb(0.9*Math.round(100*e.loaded/total_filesize))
+        console.log(e.total)
+    }
     
     request.onload=function(){
         context.decodeAudioData(request.response,function(buffer){

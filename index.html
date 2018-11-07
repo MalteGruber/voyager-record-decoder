@@ -30,7 +30,8 @@
             This page then runs some code <mark>in your browser</mark> that translates the audio recording of the record to an image
             (I.e what you see is decoded directly from the .mp3 audio file). The phonograph record has two channels, left and right.
             These channels hold different sets of images which are shown in the left and right windows. A time domain representation
-            of the signal is shown as an oscilloscope graph, it matches the newest line of the image.
+            of the signal is shown as an oscilloscope graph, it matches the newest line of the image. 
+            Line trigger detection is done on the fly and no line trigger points are stored beforehand. Note: Images are shown faster than normal audio playback. 
 
         </div>
 
@@ -96,8 +97,6 @@
                         <button type="button" onclick="rightChannel.offset=18204290" class="btn btn-default">More dudes</button>
                         <button type="button" onclick="rightChannel.offset=20785176" class="btn btn-default">A house</button>
                         <button type="button" onclick="rightChannel.offset=25833852" class="btn btn-default">The UN?</button>
-
-
 
                         <br>
                         <canvas id="plotRight" width="700" height="120" class="oscilloscope" >    Your browser does not support the HTML5 canvas tag.</canvas>
