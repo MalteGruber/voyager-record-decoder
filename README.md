@@ -10,7 +10,7 @@ The audio file contains artifacts that indicate that the audio signal has been f
 
 ![High pass filtering illustration](/doc/voyager-lp.png)
 
-This is likely an artifact produced during digitizing. Most likely the recorder was an audio recorder with a DC blocking filter. It could also be that this is a part of the encoding process which I am not understanding. It is visible in the images that I produce and other experience the [same](https://boingboing.net/2017/09/05/how-to-decode-the-images-on-th.html). Here is an example were the skewing is visible as well as the "DC-pull" after strong changes in image intensity.
+This is likely an artifact produced during digitizing. Most likely the recorder was an audio recorder with a DC blocking filter. It could also be that this is a part of the encoding process which I am not understanding. It is visible in the images that I produce and other experience the [same](https://boingboing.net/2017/09/05/how-to-decode-the-images-on-th.html). Here is an example were the skewing is visible as well as the "DC-pull" after strong changes in image intensity. This effect could possibly be a result of RIAA filtering.
 
 ![High pass filtering effects on image](/doc/numbers.png)
 
