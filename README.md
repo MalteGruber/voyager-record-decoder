@@ -1,6 +1,6 @@
 # Voyager Golden Record Decoder
 
-Github hosted [DEMO HERE](https://maltegruber.github.io/voyager-record-decoder).
+Github hosted [DEMO HERE](https://maltegruber.github.io/voyager-record-decoder). *(Please ensure that your audio output device is at 44.1 kHz. Otherwise, the recorder might not lock or show images properly.)*
 
 ## Operation
 The data from the Voyager record is downloaded as a .mp3 file. This file is converted into a two arrays holding floating point PCM samples of the right and left channels. These channels are then scanned for *sync* pulses. This is done in a very crude way, the array of a channel is scanned for a pulse that is higher than the local samples. This works *more often than not* but it is limited by some artifacts in the audio file described below.
